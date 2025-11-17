@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Sayan Chakraborty | Student Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-elevated: #020617;
+      --nav-bg: rgba(15,23,42,0.92);
+      --accent: #3b82f6;
+      --accent-soft: rgba(59,130,246,0.15);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+    }
+
+    /* Light theme variables */
+    body.light {
+      --bg: #f3f4f6;
+      --bg-elevated: #ffffff;
+      --nav-bg: rgba(243,244,246,0.97);
+      --accent: #2563eb;
+      --accent-soft: rgba(37,99,235,0.12);
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1f2937 0, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.4s ease, color 0.3s ease;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px 16px 48px;
+    }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--nav-bg);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 8px;
+      z-index: 10;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+      animation: fadeDown 0.6s ease-out;
+    }
+
+    .nav-title {
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      background: var(--accent-soft);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .theme-toggle {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 4px 9px;
+      font-size: 11px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
+    .theme-toggle:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr);
+      gap: 18px;
+      margin-top: 24px;
+      align-items: center;
+    }
+    @media (max-width: 720px) {
+      .hero {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--accent);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      margin-bottom: 10px;
+      animation: popIn 0.7s ease-out;
+    }
+    body.light .profile-pic {
+      box-shadow: 0 10px 20px rgba(15,23,42,0.25);
+    }
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    body.light .badge {
+      background: rgba(243,244,246,0.96);
+    }
+
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34,197,94,0.25);
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      animation: fadeUp 0.7s ease-out;
+    }
+    @media (min-width: 720px) {
+      .hero h1 { font-size: 34px; }
+    }
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      animation: fadeUp 0.8s ease-out;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      animation: fadeUp 0.9s ease-out;
+    }
+
+    .btn-primary, .btn-ghost {
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0b1120;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(37,99,235,0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px rgba(37,99,235,0.40);
+    }
+
+    .btn-ghost {
+      background: rgba(15,23,42,0.8);
+      border-color: var(--border);
+      color: var(--muted);
+    }
+    body.light .btn-ghost {
+      background: #ffffff;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--muted);
+      animation: fadeUp 1s ease-out;
+    }
+    .hero-meta span strong {
+      color: var(--text);
+    }
+
+    .hero-card {
+      border-radius: 20px;
+      background: radial-gradient(circle at top left, #1f2937 0, var(--bg-elevated) 60%);
+      border: 1px solid var(--border);
+      padding: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      animation: fadeLeft 0.8s ease-out;
+    }
+    body.light .hero-card {
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.14);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 12px 0;
+    }
+    .pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    body.light .pill {
+      background: #f3f4f6;
+    }
+
+    /* Sections */
+    section {
+      margin-top: 32px;
+      animation: fadeUp 0.7s ease-out;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* Grid & Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: rgba(15,23,42,0.96);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 14px;
+      transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    body.light .card {
+      background: #ffffff;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.55);
+      border-color: var(--accent-soft);
+    }
+    body.light .card:hover {
+      box-shadow: 0 16px 34px rgba(15,23,42,0.18);
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    /* Skills */
+    .skill-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .skill-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: #020617;
+      overflow: hidden;
+      margin-top: 3px;
+    }
+    body.light .skill-bar {
+      background: #e5e7eb;
+    }
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg,var(--accent),#38bdf8);
+    }
+
+    .timeline {
+      border-left: 2px solid var(--border);
+      padding-left: 10px;
+    }
+    .timeline-item {
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -12px;
+      top: 4px;
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+    .timeline-title {
+      font-size: 13px;
+    }
+    .timeline-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* Contact */
+    .contact-box {
+      border-radius: 16px;
+      border: 1px dashed var(--border);
+      padding: 14px;
+      background: rgba(15,23,42,0.9);
+      font-size: 13px;
+    }
+    body.light .contact-box {
+      background: #ffffff;
+    }
+    .contact-row {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .contact-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .footer {
+      margin-top: 22px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(18px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- NAV -->
+    <header class="nav">
+      <div class="nav-title">SAYAN CHAKRABORTY • PORTFOLIO</div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button">
+          <span id="themeIcon">🌙</span><span id="themeText">Dark</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main class="hero" id="top">
+      <div>
+        <div class="profile-pic">
+          <!-- Tomar chobi: same folder e profile.jpg file rakho -->
+          <img src="profile.jpg" alt="Sayan Chakraborty">
+        </div>
+
+        <div class="badge">
+          <div class="dot"></div>
+          <span>Available for collaboration & guidance</span>
+        </div>
+
+        <h1>
+          Hi, I’m <span>Sayan Chakraborty</span><br>
+          Class 10 student & self-learner.
+        </h1>
+
+        <p class="hero-sub">
+          I’m focusing on education and programming (Python + web),
+          building discipline through daily study and workouts, and targeting
+          <strong>65%+ in Madhyamik 2026</strong>.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn-primary" href="mailto:chandranathchakroborty@gmail.com">
+            📩 Email me
+          </a>
+          <a class="btn-ghost" href="https://www.youtube.com/@SAYNCHAKRABORTY" target="_blank">
+            ▶ My YouTube
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <span><strong>Board</strong><br>10th • WB Board</span>
+          <span><strong>Subject focus</strong><br>Education, Science basics</span>
+          <span><strong>Learning</strong><br>Python, HTML, CSS</span>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.09em; color:var(--muted); margin-bottom:6px;">
+          Current Goal
+        </div>
+        <div style="font-size:26px;font-weight:700;">
+          65%+ • Madhyamik 2026
+        </div>
+        <div class="pill-row">
+          <span class="pill">Subject: Education</span>
+          <span class="pill">Bangla, History, Geography done</span>
+          <span class="pill">English & Science revision</span>
+          <span class="pill">Daily running & workout</span>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:6px;">
+          I like turning study into <strong>systems</strong> – flashcards, quizzes and small scripts
+          so that revision becomes faster and more automatic.
+        </p>
+      </aside>
+    </main>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="section-title">About me</h2>
+      <p class="section-sub">
+        Who I am, what I’m doing now, and where I want to go.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Background</h3>
+          <p>
+            I’m a Class 10 student from West Bengal (WB Board). My main focus right now
+            is preparing for my board exams and building a strong foundation in
+            logical thinking and basic programming.
+          </p>
+        </div>
+        <div class="card">
+          <h3>What I’m improving</h3>
+          <p>
+            English grammar, problem solving, and consistency in study hours.
+            I’m also working on controlling screen time and replacing random scrolling
+            with focused learning.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Interests</h3>
+          <p>
+            Coding in Python, building simple tools, Minecraft, and learning about
+            the geography and industries of India – especially West Bengal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-sub">
+        An honest overview of what I’m practising right now.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Academic</h3>
+          <div class="skill-row">
+            <span>Bangla Grammar</span><span>Intermediate</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+
+          <div class="skill-row">
+            <span>History & Geography</span><span>Good</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+
+          <div class="skill-row">
+            <span>Maths basics</span><span>Improving</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+        </div>
+
+        <div class="card">
+          <h3>Tech</h3>
+          <div class="skill-row">
+            <span>Python basics</span><span>Learning</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+
+          <div class="skill-row">
+            <span>HTML & CSS</span><span>Beginner</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div>
+
+          <div class="skill-row">
+            <span>Problem solving</span><span>Growing</span>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+
+        <div class="card">
+          <h3>Habits & mindset</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-title">Daily running & workout</div>
+              <div class="timeline-meta">Helps with focus, confidence and energy.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-title">Screen-time control</div>
+              <div class="timeline-meta">Reducing social media, increasing deep work.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-title">Consistent revision</div>
+              <div class="timeline-meta">Turning notes into flashcards and quizzes.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">
+        Small but real things I have built or I’m planning to build.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <h3>Bangla Grammar Flashcards (Python)</h3>
+          <p>
+            A terminal-based flashcard app that asks Bangla grammar questions and
+            repeats wrong answers more often, helping me remember rules for longer.
+          </p>
+          <p style="font-size:12px;">
+            Tech: Python, JSON, basic algorithms.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Student Portfolio Website</h3>
+          <p>
+            This website itself – a responsive personal portfolio created fully
+            on mobile using only HTML, CSS and a bit of JavaScript for theme toggle.
+          </p>
+          <p style="font-size:12px;">
+            Tech: HTML, CSS, JS (theme, animations).
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Madhyamik Revision Tracker (planned)</h3>
+          <p>
+            A web tool to track chapter-wise progress for all subjects, show
+            completion percentage and highlight weak areas for revision.
+          </p>
+          <p style="font-size:12px;">
+            Planned: HTML, CSS, basic JS logic.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">
+        For educational guidance, collaboration or any useful advice, you can reach me here.
+      </p>
+      <div class="contact-box">
+        <div class="contact-row">
+          <div class="contact-label">Email</div>
+          <a href="mailto:chandranathchakroborty@gmail.com">
+            chandranathchakroborty@gmail.com
+          </a>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label">Location</div>
+          <span>West Bengal, India</span>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label">Subject</div>
+          <span>Education</span>
+        </div>
+        <div class="contact-row">
+          <div class="contact-label">YouTube Channel</div>
+          <a href="https://www.youtube.com/@SAYNCHAKRABORTY" target="_blank">
+            youtube.com/@SAYNCHAKRABORTY
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      © <span id="year">2025</span> Sayan Chakraborty • Built on mobile with pure HTML, CSS & JS
+    </div>
+  </div>
+
+  <script>
+    // Year auto update
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Theme toggle (light / dark)
+    const toggleBtn = document.getElementById("themeToggle");
+    const icon = document.getElementById("themeIcon");
+    const txt = document.getElementById("themeText");
+    const body = document.body;
+
+    // default: dark; click -> light
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("light");
+      const lightOn = body.classList.contains("light");
+      icon.textContent = lightOn ? "☀" : "🌙";
+      txt.textContent = lightOn ? "Light" : "Dark";
+    });
+  </script>
+</body>
+</html>
